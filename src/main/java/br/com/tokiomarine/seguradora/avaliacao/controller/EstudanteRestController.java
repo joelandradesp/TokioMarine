@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,8 @@ public class EstudanteRestController {
 
 	// TODO IMPLEMENTAR ATUALIZACAO DE ESTUDANTES (PUT)
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Estudante> atualizar(@PathVariable(name = "id") Long id, @RequestBody Estudante estudante){
+	public ResponseEntity<Estudante> atualizar(@PathVariable(name = "id") Integer id, @RequestBody Estudante estudante){
+		estudante.setIdEstudante(id);
 		return ResponseEntity.ok(this.estudanteService.atualizarEstudante(estudante));
 	}
 
@@ -49,4 +51,9 @@ public class EstudanteRestController {
 //	}
 
 	// TODO IMPLEMENTAR A EXCLUSÃO DE ESTUDANTES (DELETE)
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<Integer> remover(@PathVariable(name = "id" Long id)){
+		this.estudanteService.deleteEstudante(id);
+	}
+	
 }
